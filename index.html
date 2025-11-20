@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pantry Passport</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Source+Sans+3:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/tailwindcss-cdn@3.4.10/tailwindcss.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style type="text/tailwindcss" data-teda="tailwind-apply">
+    @layer components {
+      .btn-primary { @apply inline-flex items-center justify-center gap-2 bg-[#F26D3D] text-white px-5 py-3 rounded-full font-medium shadow-lg hover:shadow-xl hover:bg-[#e45f2f] focus:outline-none focus:ring-4 focus:ring-[#F26D3D]/30 active:scale-[0.98] transition-all duration-300 whitespace-nowrap; }
+      .btn-secondary { @apply inline-flex items-center justify-center gap-2 bg-white text-[#0F172A] px-5 py-3 rounded-full font-medium border border-black/5 shadow-sm hover:shadow-md hover:bg-[#faf8f4] focus:outline-none focus:ring-4 focus:ring-black/10 active:scale-[0.98] transition-all duration-300 whitespace-nowrap; }
+      .chip { @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white shadow-sm ring-1 ring-black/5 text-sm font-medium text-[#0F172A]; }
+      .card { @apply bg-white rounded-2xl shadow-xl ring-1 ring-black/5 p-6 transition-all duration-300; }
+      .input { @apply w-full bg-white border border-black/10 rounded-xl px-4 py-3 shadow-sm focus:outline-none focus:ring-4 focus:ring-[#0FA958]/20 ring-1 ring-black/5; }
+      .select { @apply w-full bg-white border border-black/10 rounded-xl px-4 py-3 shadow-sm focus:outline-none focus:ring-4 focus:ring-[#0FA958]/20 ring-1 ring-black/5; }
+      .section-title { @apply text-2xl md:text-3xl font-bold tracking-tight text-[#0F172A]; font-family: 'Libre Baskerville', serif; }
+      .headline { @apply text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#0F172A]; font-family: 'Libre Baskerville', serif; }
+      .subhead { @apply text-lg md:text-xl text-[#334155]; }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#F8F6F3] text-[#0F172A] antialiased">
+  <header class="sticky top-0 z-40 bg-[#F8F6F3]/80 backdrop-blur supports-[backdrop-filter]:bg-[#F8F6F3]/70">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <img src="assets/logo.svg" alt="Pantry Passport" class="h-8 w-8 animate-float" />
+        <span class="text-xl font-semibold">Pantry Passport</span>
+      </a>
+      <nav class="hidden sm:flex items-center gap-3">
+        <a href="#features" class="btn-secondary">Features</a>
+        <a href="app.html" class="btn-primary">Open the App</a>
+      </nav>
+      <a href="app.html" class="sm:hidden btn-primary">Open</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 -z-10">
+        <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] rounded-full bg-[#0FA958]/5 blur-3xl"></div>
+      </div>
+      <div class="max-w-4xl mx-auto px-6 pt-16 pb-20 text-center">
+        <h1 class="headline leading-[1.1]">Cook global, shop smarter, waste less</h1>
+        <p class="subhead mt-5 max-w-2xl mx-auto">Instantly generate global recipes and a smart shopping list. Add what you already have, choose a country, and get recipes that fit your pantry.</p>
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="app.html" class="btn-primary">Start cooking now</a>
+          <a href="#features" class="btn-secondary">See how it works</a>
+        </div>
+        <div class="mt-10 flex items-center justify-center gap-2 text-sm text-[#475569]">
+          <span class="chip">No sign-up</span>
+          <span class="chip">Offline-friendly</span>
+          <span class="chip">Data stays on your device</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="max-w-7xl mx-auto px-6 pb-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-7 card">
+          <h2 class="section-title">Global recipes</h2>
+          <p class="mt-3 text-[#334155]">Tap to get a dish from your selected country. We build a shopping list automatically and highlight what you already have.</p>
+          <div class="mt-6 flex flex-wrap gap-2">
+            <span class="chip">Jollof Rice</span>
+            <span class="chip">Chana Masala</span>
+            <span class="chip">Pasta al Pomodoro</span>
+            <span class="chip">Street Tacos</span>
+            <span class="chip">Vegetable Couscous</span>
+          </div>
+        </div>
+        <div class="lg:col-span-5 card">
+          <h2 class="section-title">Pantry-aware suggestions</h2>
+          <p class="mt-3 text-[#334155]">Add ingredients you own. Pick a country and get the best matching native recipe with missing items neatly organized.</p>
+          <div class="mt-6 flex items-center gap-3">
+            <span class="chip">Plantain</span>
+            <span class="chip">Tomatoes</span>
+            <span class="chip">Palm oil</span>
+          </div>
+        </div>
+        <div class="lg:col-span-6 card">
+          <h2 class="section-title">Global flavors</h2>
+          <p class="mt-3 text-[#334155]">Explore cuisines worldwide: Ghana, Kenya, Ethiopia, Morocco, India, Italy, Mexico, and more. Every suggestion stays true to local style.</p>
+        </div>
+        <div class="lg:col-span-6 card">
+          <h2 class="section-title">Beautiful shopping list</h2>
+          <p class="mt-3 text-[#334155]">One tap adds missing items. Check off as you shop and your list stays saved, even if you close the tab.</p>
+        </div>
+      </div>
+
+      <div class="mt-10 text-center">
+        <a href="app.html" class="btn-primary">Open the App</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-black/5 bg-white/60">
+    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <img src="assets/logo.svg" class="h-6 w-6" alt="Logo"/>
+        <span class="text-sm text-[#475569]">Cook global. Shop smart.</span>
+      </div>
+      <div class="text-sm text-[#64748B]">Built for everyday cooks. Your data stays local.</div>
+    </div>
+  </footer>
+</body>
+</html>

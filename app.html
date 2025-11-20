@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F8F6F3">
+  <title>Pantry Passport – App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Source+Sans+3:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/tailwindcss-cdn@3.4.10/tailwindcss.js"></script>
+  <style type="text/tailwindcss" data-teda="tailwind-apply">
+    @layer components {
+      .btn-primary { @apply inline-flex items-center justify-center gap-2 bg-[#F26D3D] text-white px-5 py-3 rounded-full font-medium shadow-lg hover:shadow-xl hover:bg-[#e45f2f] focus:outline-none focus:ring-4 focus:ring-[#F26D3D]/30 active:scale-[0.98] transition-all duration-300 whitespace-nowrap; }
+      .btn-secondary { @apply inline-flex items-center justify-center gap-2 bg-white text-[#0F172A] px-5 py-3 rounded-full font-medium border border-black/5 shadow-sm hover:shadow-md hover:bg-[#faf8f4] focus:outline-none focus:ring-4 focus:ring-black/10 active:scale-[0.98] transition-all duration-300 whitespace-nowrap; }
+      .chip { @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white shadow-sm ring-1 ring-black/5 text-sm font-medium text-[#0F172A]; }
+      .card { @apply bg-white rounded-2xl shadow-xl ring-1 ring-black/5 p-6 transition-all duration-300; }
+      .input { @apply w-full bg-white border border-black/10 rounded-xl px-4 py-3 shadow-sm focus:outline-none focus:ring-4 focus:ring-[#0FA958]/20 ring-1 ring-black/5; }
+      .select { @apply w-full bg-white border border-black/10 rounded-xl px-4 py-3 shadow-sm focus:outline-none focus:ring-4 focus:ring-[#0FA958]/20 ring-1 ring-black/5; }
+      .section-title { @apply text-2xl md:text-3xl font-bold tracking-tight text-[#0F172A]; font-family: 'Libre Baskerville', serif; }
+      .headline { @apply text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#0F172A]; font-family: 'Libre Baskerville', serif; }
+      .subhead { @apply text-lg md:text-xl text-[#334155]; }
+      .kbd { @apply inline-flex items-center justify-center rounded-lg border border-black/10 bg-white px-2 py-1 text-xs font-medium text-[#0F172A] shadow-sm; }
+    }
+  </style>
+  <script src="scripts/app.js" defer></script>
+</head>
+<body class="min-h-screen bg-[#F8F6F3] text-[#0F172A] antialiased">
+  <header class="sticky top-0 z-40 bg-[#F8F6F3]/80 backdrop-blur supports-[backdrop-filter]:bg-[#F8F6F3]/70">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/logo.svg" alt="Pantry Passport" class="h-8 w-8 animate-float" />
+        <span class="text-xl font-semibold">Pantry Passport</span>
+      </a>
+      <div class="flex items-center gap-3">
+        <a href="#shopping" class="btn-secondary hidden sm:inline-flex">Shopping List</a>
+        <a href="index.html" class="btn-primary">Home</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <section class="lg:col-span-5 card">
+      <h2 class="section-title">Your Pantry</h2>
+      <p class="mt-2 text-[#334155]">Add what you already have. We'll suggest recipes that fit and highlight what's missing.</p>
+
+      <div class="mt-4 flex gap-2">
+        <input id="pantry-input" class="input" type="text" placeholder="e.g., rice, tomato, onion" aria-label="Add pantry items" />
+        <button id="pantry-add-btn" class="btn-primary" aria-label="Add pantry item">Add</button>
+      </div>
+      <p class="mt-2 text-xs text-[#64748B]">Tip: paste a comma-separated list, then press Enter.</p>
+
+      <div id="pantry-list" class="mt-4 flex flex-wrap gap-2" aria-live="polite"></div>
+
+      <div class="mt-6">
+        <label class="block text-sm font-medium text-[#334155] mb-2" for="country-select">Choose a country</label>
+        <select id="country-select" class="select">
+          <option value="Nigeria">Nigeria</option>
+          <option value="Ghana">Ghana</option>
+          <option value="Kenya">Kenya</option>
+          <option value="Ethiopia">Ethiopia</option>
+          <option value="Morocco">Morocco</option>
+          <option value="India">India</option>
+          <option value="Italy">Italy</option>
+          <option value="Mexico">Mexico</option>
+          <option value="Any" selected>Any country</option>
+        </select>
+      </div>
+
+      <div class="mt-6 flex flex-wrap gap-2">
+        <button id="suggest-btn" class="btn-primary">Suggest recipe</button>
+        <button id="random-ng-btn" class="btn-secondary">Surprise me</button>
+      </div>
+    </section>
+
+    <section class="lg:col-span-7 card">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <h2 class="section-title">Recipe</h2>
+          <p class="mt-2 text-[#334155]" id="recipe-subtitle">Choose an option to see a recipe that fits your pantry.</p>
+        </div>
+        <div class="flex gap-2">
+          <button id="refresh-recipe-btn" class="btn-secondary disabled:opacity-40 disabled:cursor-not-allowed" disabled>See another</button>
+          <button id="add-missing-btn" class="btn-primary disabled:opacity-40 disabled:cursor-not-allowed" disabled>Add missing to shopping</button>
+        </div>
+      </div>
+
+      <div id="recipe-view" class="mt-6 space-y-6" aria-live="polite"></div>
+    </section>
+
+    <section id="shopping" class="lg:col-span-12 card">
+      <div class="flex items-center justify-between">
+        <h2 class="section-title">Shopping List</h2>
+        <div class="flex gap-2">
+          <button id="clear-purchased-btn" class="btn-secondary">Clear purchased</button>
+          <button id="reset-list-btn" class="btn-secondary">Reset list</button>
+        </div>
+      </div>
+
+      <div class="mt-4 flex gap-2">
+        <input id="shopping-input" class="input" type="text" placeholder="Add an item…" aria-label="Add shopping list item" />
+        <button id="shopping-add-btn" class="btn-primary" aria-label="Add shopping list item">Add</button>
+      </div>
+
+      <ul id="shopping-list" class="mt-4 divide-y divide-black/5" aria-live="polite"></ul>
+    </section>
+  </main>
+
+  <footer class="border-t border-black/5 bg-white/60">
+    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <img src="assets/logo.svg" class="h-6 w-6" alt="Logo"/>
+        <span class="text-sm text-[#475569]">Cook global. Shop smart.</span>
+      </div>
+      <div class="text-sm text-[#64748B]">Data stays in your browser. No sign-up required.</div>
+    </div>
+  </footer>
+</body>
+</html>

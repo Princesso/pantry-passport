@@ -1,0 +1,12 @@
+/* Minimal site-wide CSS (Tailwind utilities handle most styling) */
+:root { color-scheme: light; }
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+.animate-float { animation: float 3s ease-in-out infinite; }
+
+/* Improve focus visibility slightly when not covered by Tailwind */
+:focus-visible { outline: 2px solid #0FA958; outline-offset: 2px; }

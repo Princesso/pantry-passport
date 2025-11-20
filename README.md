@@ -1,2 +1,0 @@
-# pantry-passport
-Pantry Passport
